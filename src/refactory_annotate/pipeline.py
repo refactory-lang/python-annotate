@@ -230,6 +230,13 @@ def _run_verification(
     if verbose:
         _log("Running mypy --strict …")
     success, errors = verify_with_mypy(py_files)
+    if not success and not errors:
+        # Ensure a failed mypy run is reflected in the report even if there
+        # was no diagnostic output (e.g. errors only on stderr or a silent
+        # non-zero exit).
+        errors = [
+            "mypy --strict failed with a non-zero exit code but produced no output."
+        ]
     report.mypy_errors = errors
     if verbose:
         if success:
