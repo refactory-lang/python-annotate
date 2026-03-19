@@ -259,7 +259,9 @@ def _insert_typing_import(source: str, names: list[str]) -> str:
     while i < len(lines):
         if lines[i].startswith("from __future__"):
             last_future = i + 1
-        i += 1
+            i += 1
+        else:
+            break
 
     insert_at = last_future
 
