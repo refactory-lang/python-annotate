@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "refactory-annotate"
+name = "python-annotate"
 version = "0.1.0"
 description = "Type inference CLI for Refactory — infers types via pyright, inserts PEP 484 annotations, verifies with mypy --strict"
 readme = "README.md"
@@ -30,7 +30,7 @@ dependencies = [
 ]
 
 [project.scripts]
-refactory-annotate = "refactory_annotate.cli:main"
+python-annotate = "refactory_annotate.cli:main"
 
 [project.optional-dependencies]
 dev = [
