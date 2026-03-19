@@ -1,0 +1,706 @@
+[
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "annotations",
+        "importPath": "__future__",
+        "description": "__future__",
+        "isExtraImport": true,
+        "detail": "__future__",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "replace",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "dataclass",
+        "importPath": "dataclasses",
+        "description": "dataclasses",
+        "isExtraImport": true,
+        "detail": "dataclasses",
+        "documentation": {}
+    },
+    {
+        "label": "Result",
+        "importPath": "returns.result",
+        "description": "returns.result",
+        "isExtraImport": true,
+        "detail": "returns.result",
+        "documentation": {}
+    },
+    {
+        "label": "Success",
+        "importPath": "returns.result",
+        "description": "returns.result",
+        "isExtraImport": true,
+        "detail": "returns.result",
+        "documentation": {}
+    },
+    {
+        "label": "Failure",
+        "importPath": "returns.result",
+        "description": "returns.result",
+        "isExtraImport": true,
+        "detail": "returns.result",
+        "documentation": {}
+    },
+    {
+        "label": "Result",
+        "importPath": "returns.result",
+        "description": "returns.result",
+        "isExtraImport": true,
+        "detail": "returns.result",
+        "documentation": {}
+    },
+    {
+        "label": "Success",
+        "importPath": "returns.result",
+        "description": "returns.result",
+        "isExtraImport": true,
+        "detail": "returns.result",
+        "documentation": {}
+    },
+    {
+        "label": "Failure",
+        "importPath": "returns.result",
+        "description": "returns.result",
+        "isExtraImport": true,
+        "detail": "returns.result",
+        "documentation": {}
+    },
+    {
+        "label": "Result",
+        "importPath": "returns.result",
+        "description": "returns.result",
+        "isExtraImport": true,
+        "detail": "returns.result",
+        "documentation": {}
+    },
+    {
+        "label": "Success",
+        "importPath": "returns.result",
+        "description": "returns.result",
+        "isExtraImport": true,
+        "detail": "returns.result",
+        "documentation": {}
+    },
+    {
+        "label": "Failure",
+        "importPath": "returns.result",
+        "description": "returns.result",
+        "isExtraImport": true,
+        "detail": "returns.result",
+        "documentation": {}
+    },
+    {
+        "label": "Result",
+        "importPath": "returns.result",
+        "description": "returns.result",
+        "isExtraImport": true,
+        "detail": "returns.result",
+        "documentation": {}
+    },
+    {
+        "label": "Success",
+        "importPath": "returns.result",
+        "description": "returns.result",
+        "isExtraImport": true,
+        "detail": "returns.result",
+        "documentation": {}
+    },
+    {
+        "label": "Failure",
+        "importPath": "returns.result",
+        "description": "returns.result",
+        "isExtraImport": true,
+        "detail": "returns.result",
+        "documentation": {}
+    },
+    {
+        "label": "Maybe",
+        "importPath": "returns.maybe",
+        "description": "returns.maybe",
+        "isExtraImport": true,
+        "detail": "returns.maybe",
+        "documentation": {}
+    },
+    {
+        "label": "Some",
+        "importPath": "returns.maybe",
+        "description": "returns.maybe",
+        "isExtraImport": true,
+        "detail": "returns.maybe",
+        "documentation": {}
+    },
+    {
+        "label": "Nothing",
+        "importPath": "returns.maybe",
+        "description": "returns.maybe",
+        "isExtraImport": true,
+        "detail": "returns.maybe",
+        "documentation": {}
+    },
+    {
+        "label": "Maybe",
+        "importPath": "returns.maybe",
+        "description": "returns.maybe",
+        "isExtraImport": true,
+        "detail": "returns.maybe",
+        "documentation": {}
+    },
+    {
+        "label": "Some",
+        "importPath": "returns.maybe",
+        "description": "returns.maybe",
+        "isExtraImport": true,
+        "detail": "returns.maybe",
+        "documentation": {}
+    },
+    {
+        "label": "Nothing",
+        "importPath": "returns.maybe",
+        "description": "returns.maybe",
+        "isExtraImport": true,
+        "detail": "returns.maybe",
+        "documentation": {}
+    },
+    {
+        "label": "Maybe",
+        "importPath": "returns.maybe",
+        "description": "returns.maybe",
+        "isExtraImport": true,
+        "detail": "returns.maybe",
+        "documentation": {}
+    },
+    {
+        "label": "Some",
+        "importPath": "returns.maybe",
+        "description": "returns.maybe",
+        "isExtraImport": true,
+        "detail": "returns.maybe",
+        "documentation": {}
+    },
+    {
+        "label": "Nothing",
+        "importPath": "returns.maybe",
+        "description": "returns.maybe",
+        "isExtraImport": true,
+        "detail": "returns.maybe",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "ast",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "ast",
+        "description": "ast",
+        "detail": "ast",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Point",
+        "kind": 6,
+        "importPath": "tests.e2e.simple",
+        "description": "tests.e2e.simple",
+        "peekOfCode": "class Point:\n    x: float\n    y: float\ndef add(a: float, b: float) -> float:\n    return a + b\ndef greet(name: str) -> str:\n    return f\"Hello, {name}!\"\ndef safe_divide(a: float, b: float) -> Result[float, str]:\n    if b == 0.0:\n        return Failure(\"Division by zero\")",
+        "detail": "tests.e2e.simple",
+        "documentation": {}
+    },
+    {
+        "label": "add",
+        "kind": 2,
+        "importPath": "tests.e2e.simple",
+        "description": "tests.e2e.simple",
+        "peekOfCode": "def add(a: float, b: float) -> float:\n    return a + b\ndef greet(name: str) -> str:\n    return f\"Hello, {name}!\"\ndef safe_divide(a: float, b: float) -> Result[float, str]:\n    if b == 0.0:\n        return Failure(\"Division by zero\")\n    return Success(a / b)\ndef first_positive(items: list[float]) -> Maybe[float]:\n    for x in items:",
+        "detail": "tests.e2e.simple",
+        "documentation": {}
+    },
+    {
+        "label": "greet",
+        "kind": 2,
+        "importPath": "tests.e2e.simple",
+        "description": "tests.e2e.simple",
+        "peekOfCode": "def greet(name: str) -> str:\n    return f\"Hello, {name}!\"\ndef safe_divide(a: float, b: float) -> Result[float, str]:\n    if b == 0.0:\n        return Failure(\"Division by zero\")\n    return Success(a / b)\ndef first_positive(items: list[float]) -> Maybe[float]:\n    for x in items:\n        if x > 0.0:\n            return Some(x)",
+        "detail": "tests.e2e.simple",
+        "documentation": {}
+    },
+    {
+        "label": "safe_divide",
+        "kind": 2,
+        "importPath": "tests.e2e.simple",
+        "description": "tests.e2e.simple",
+        "peekOfCode": "def safe_divide(a: float, b: float) -> Result[float, str]:\n    if b == 0.0:\n        return Failure(\"Division by zero\")\n    return Success(a / b)\ndef first_positive(items: list[float]) -> Maybe[float]:\n    for x in items:\n        if x > 0.0:\n            return Some(x)\n    return Nothing\ndef classify(score: float) -> str:",
+        "detail": "tests.e2e.simple",
+        "documentation": {}
+    },
+    {
+        "label": "first_positive",
+        "kind": 2,
+        "importPath": "tests.e2e.simple",
+        "description": "tests.e2e.simple",
+        "peekOfCode": "def first_positive(items: list[float]) -> Maybe[float]:\n    for x in items:\n        if x > 0.0:\n            return Some(x)\n    return Nothing\ndef classify(score: float) -> str:\n    if score >= 0.9:\n        return \"excellent\"\n    elif score >= 0.7:\n        return \"good\"",
+        "detail": "tests.e2e.simple",
+        "documentation": {}
+    },
+    {
+        "label": "classify",
+        "kind": 2,
+        "importPath": "tests.e2e.simple",
+        "description": "tests.e2e.simple",
+        "peekOfCode": "def classify(score: float) -> str:\n    if score >= 0.9:\n        return \"excellent\"\n    elif score >= 0.7:\n        return \"good\"\n    elif score >= 0.5:\n        return \"fair\"\n    else:\n        return \"poor\"",
+        "detail": "tests.e2e.simple",
+        "documentation": {}
+    },
+    {
+        "label": "MutableRecord",
+        "kind": 6,
+        "importPath": "tests.profile-invalid.violations",
+        "description": "tests.profile-invalid.violations",
+        "peekOfCode": "class MutableRecord:\n    name: str\n    value: int\n# R003 violation: missing return type annotation\ndef process(x):  # VIOLATION: no return type\n    return x + 1\n# R001 violation: bare raise\ndef validate_isin(isin: str) -> str:\n    if len(isin) != 12:\n        raise ValueError(\"Bad ISIN\")  # VIOLATION: use Failure()",
+        "detail": "tests.profile-invalid.violations",
+        "documentation": {}
+    },
+    {
+        "label": "process",
+        "kind": 2,
+        "importPath": "tests.profile-invalid.violations",
+        "description": "tests.profile-invalid.violations",
+        "peekOfCode": "def process(x):  # VIOLATION: no return type\n    return x + 1\n# R001 violation: bare raise\ndef validate_isin(isin: str) -> str:\n    if len(isin) != 12:\n        raise ValueError(\"Bad ISIN\")  # VIOLATION: use Failure()\n    return isin\n# R002 violation: try/except\ndef read_data(path: str) -> str:\n    try:  # VIOLATION: use Result",
+        "detail": "tests.profile-invalid.violations",
+        "documentation": {}
+    },
+    {
+        "label": "validate_isin",
+        "kind": 2,
+        "importPath": "tests.profile-invalid.violations",
+        "description": "tests.profile-invalid.violations",
+        "peekOfCode": "def validate_isin(isin: str) -> str:\n    if len(isin) != 12:\n        raise ValueError(\"Bad ISIN\")  # VIOLATION: use Failure()\n    return isin\n# R002 violation: try/except\ndef read_data(path: str) -> str:\n    try:  # VIOLATION: use Result\n        with open(path) as f:\n            return f.read()\n    except IOError:",
+        "detail": "tests.profile-invalid.violations",
+        "documentation": {}
+    },
+    {
+        "label": "read_data",
+        "kind": 2,
+        "importPath": "tests.profile-invalid.violations",
+        "description": "tests.profile-invalid.violations",
+        "peekOfCode": "def read_data(path: str) -> str:\n    try:  # VIOLATION: use Result\n        with open(path) as f:\n            return f.read()\n    except IOError:\n        return \"\"\n# R004 violation: bare None return\ndef find_user(user_id: int) -> str:\n    if user_id == 0:\n        return None  # VIOLATION: use Nothing",
+        "detail": "tests.profile-invalid.violations",
+        "documentation": {}
+    },
+    {
+        "label": "find_user",
+        "kind": 2,
+        "importPath": "tests.profile-invalid.violations",
+        "description": "tests.profile-invalid.violations",
+        "peekOfCode": "def find_user(user_id: int) -> str:\n    if user_id == 0:\n        return None  # VIOLATION: use Nothing\n    return \"found\"\n# R005 violation: Optional type\ndef get_name(user_id: int) -> Optional[str]:  # VIOLATION: use Maybe[str]\n    return None\n# R006 violation: Any type\ndef process_any(data: Any) -> Any:  # VIOLATION: no Any\n    return data",
+        "detail": "tests.profile-invalid.violations",
+        "documentation": {}
+    },
+    {
+        "label": "get_name",
+        "kind": 2,
+        "importPath": "tests.profile-invalid.violations",
+        "description": "tests.profile-invalid.violations",
+        "peekOfCode": "def get_name(user_id: int) -> Optional[str]:  # VIOLATION: use Maybe[str]\n    return None\n# R006 violation: Any type\ndef process_any(data: Any) -> Any:  # VIOLATION: no Any\n    return data\n# R008 violation: global mutable state\ncounter = 0  # VIOLATION: global mutable variable\n# R009 violation: eval\ndef dynamic_eval(code: str) -> str:\n    return eval(code)  # VIOLATION: no eval",
+        "detail": "tests.profile-invalid.violations",
+        "documentation": {}
+    },
+    {
+        "label": "process_any",
+        "kind": 2,
+        "importPath": "tests.profile-invalid.violations",
+        "description": "tests.profile-invalid.violations",
+        "peekOfCode": "def process_any(data: Any) -> Any:  # VIOLATION: no Any\n    return data\n# R008 violation: global mutable state\ncounter = 0  # VIOLATION: global mutable variable\n# R009 violation: eval\ndef dynamic_eval(code: str) -> str:\n    return eval(code)  # VIOLATION: no eval\n# R010 violation: dynamic getattr\ndef get_field(obj: object, name: str) -> str:\n    return getattr(obj, name)  # VIOLATION: no dynamic getattr",
+        "detail": "tests.profile-invalid.violations",
+        "documentation": {}
+    },
+    {
+        "label": "dynamic_eval",
+        "kind": 2,
+        "importPath": "tests.profile-invalid.violations",
+        "description": "tests.profile-invalid.violations",
+        "peekOfCode": "def dynamic_eval(code: str) -> str:\n    return eval(code)  # VIOLATION: no eval\n# R010 violation: dynamic getattr\ndef get_field(obj: object, name: str) -> str:\n    return getattr(obj, name)  # VIOLATION: no dynamic getattr\n# R011 violation: *args/**kwargs\ndef flexible_func(*args, **kwargs) -> str:  # VIOLATION: no *args/**kwargs\n    return str(args)",
+        "detail": "tests.profile-invalid.violations",
+        "documentation": {}
+    },
+    {
+        "label": "get_field",
+        "kind": 2,
+        "importPath": "tests.profile-invalid.violations",
+        "description": "tests.profile-invalid.violations",
+        "peekOfCode": "def get_field(obj: object, name: str) -> str:\n    return getattr(obj, name)  # VIOLATION: no dynamic getattr\n# R011 violation: *args/**kwargs\ndef flexible_func(*args, **kwargs) -> str:  # VIOLATION: no *args/**kwargs\n    return str(args)",
+        "detail": "tests.profile-invalid.violations",
+        "documentation": {}
+    },
+    {
+        "label": "flexible_func",
+        "kind": 2,
+        "importPath": "tests.profile-invalid.violations",
+        "description": "tests.profile-invalid.violations",
+        "peekOfCode": "def flexible_func(*args, **kwargs) -> str:  # VIOLATION: no *args/**kwargs\n    return str(args)",
+        "detail": "tests.profile-invalid.violations",
+        "documentation": {}
+    },
+    {
+        "label": "counter",
+        "kind": 5,
+        "importPath": "tests.profile-invalid.violations",
+        "description": "tests.profile-invalid.violations",
+        "peekOfCode": "counter = 0  # VIOLATION: global mutable variable\n# R009 violation: eval\ndef dynamic_eval(code: str) -> str:\n    return eval(code)  # VIOLATION: no eval\n# R010 violation: dynamic getattr\ndef get_field(obj: object, name: str) -> str:\n    return getattr(obj, name)  # VIOLATION: no dynamic getattr\n# R011 violation: *args/**kwargs\ndef flexible_func(*args, **kwargs) -> str:  # VIOLATION: no *args/**kwargs\n    return str(args)",
+        "detail": "tests.profile-invalid.violations",
+        "documentation": {}
+    },
+    {
+        "label": "MatchScore",
+        "kind": 6,
+        "importPath": "tests.profile-valid.matcher",
+        "description": "tests.profile-valid.matcher",
+        "peekOfCode": "class MatchScore:\n    value: float\n    confidence: str\n@dataclass(frozen=True)\nclass EntityRecord:\n    isin: str\n    name: str\n    country: str\ndef exact_match(a: str, b: str) -> float:\n    if a == b:",
+        "detail": "tests.profile-valid.matcher",
+        "documentation": {}
+    },
+    {
+        "label": "EntityRecord",
+        "kind": 6,
+        "importPath": "tests.profile-valid.matcher",
+        "description": "tests.profile-valid.matcher",
+        "peekOfCode": "class EntityRecord:\n    isin: str\n    name: str\n    country: str\ndef exact_match(a: str, b: str) -> float:\n    if a == b:\n        return 1.0\n    return 0.0\ndef jaro_winkler(a: str, b: str) -> float:\n    if a == b:",
+        "detail": "tests.profile-valid.matcher",
+        "documentation": {}
+    },
+    {
+        "label": "exact_match",
+        "kind": 2,
+        "importPath": "tests.profile-valid.matcher",
+        "description": "tests.profile-valid.matcher",
+        "peekOfCode": "def exact_match(a: str, b: str) -> float:\n    if a == b:\n        return 1.0\n    return 0.0\ndef jaro_winkler(a: str, b: str) -> float:\n    if a == b:\n        return 1.0\n    # Simplified — real implementation would be more complex\n    common: int = sum(1 for ca, cb in zip(a, b) if ca == cb)\n    if len(a) == 0 or len(b) == 0:",
+        "detail": "tests.profile-valid.matcher",
+        "documentation": {}
+    },
+    {
+        "label": "jaro_winkler",
+        "kind": 2,
+        "importPath": "tests.profile-valid.matcher",
+        "description": "tests.profile-valid.matcher",
+        "peekOfCode": "def jaro_winkler(a: str, b: str) -> float:\n    if a == b:\n        return 1.0\n    # Simplified — real implementation would be more complex\n    common: int = sum(1 for ca, cb in zip(a, b) if ca == cb)\n    if len(a) == 0 or len(b) == 0:\n        return 0.0\n    return common / max(len(a), len(b))\ndef calculate_score(\n    record: EntityRecord,",
+        "detail": "tests.profile-valid.matcher",
+        "documentation": {}
+    },
+    {
+        "label": "calculate_score",
+        "kind": 2,
+        "importPath": "tests.profile-valid.matcher",
+        "description": "tests.profile-valid.matcher",
+        "peekOfCode": "def calculate_score(\n    record: EntityRecord,\n    candidate: EntityRecord,\n    weight_isin: float,\n    weight_name: float,\n) -> Result[MatchScore, str]:\n    isin_score: float = exact_match(record.isin, candidate.isin)\n    name_score: float = jaro_winkler(record.name, candidate.name)\n    total_weight: float = weight_isin + weight_name\n    if total_weight == 0.0:",
+        "detail": "tests.profile-valid.matcher",
+        "documentation": {}
+    },
+    {
+        "label": "find_best_match",
+        "kind": 2,
+        "importPath": "tests.profile-valid.matcher",
+        "description": "tests.profile-valid.matcher",
+        "peekOfCode": "def find_best_match(\n    record: EntityRecord,\n    candidates: list[EntityRecord],\n) -> Maybe[MatchScore]:\n    if len(candidates) == 0:\n        return Nothing\n    best: Maybe[MatchScore] = Nothing\n    best_value: float = 0.0\n    for candidate in candidates:\n        result: Result[MatchScore, str] = calculate_score(",
+        "detail": "tests.profile-valid.matcher",
+        "documentation": {}
+    },
+    {
+        "label": "normalise_isin",
+        "kind": 2,
+        "importPath": "tests.profile-valid.matcher",
+        "description": "tests.profile-valid.matcher",
+        "peekOfCode": "def normalise_isin(raw: str) -> Result[str, str]:\n    cleaned: str = raw.strip().upper()\n    if len(cleaned) != 12:\n        return Failure(f\"ISIN must be 12 characters, got {len(cleaned)}\")\n    return Success(cleaned)",
+        "detail": "tests.profile-valid.matcher",
+        "documentation": {}
+    },
+    {
+        "label": "parse_int",
+        "kind": 2,
+        "importPath": "tests.tier1-errors.before.results",
+        "description": "tests.tier1-errors.before.results",
+        "peekOfCode": "def parse_int(s: str) -> Result[int, str]:\n    if s.isdigit():\n        return Success(int(s))\n    return Failure(f\"Cannot parse '{s}'\")\ndef double_parsed(s: str) -> Result[int, str]:\n    return parse_int(s).map(lambda x: x * 2)\ndef chain_parse(s: str) -> Result[str, str]:\n    return parse_int(s).bind(lambda x: Success(str(x + 1)))\ndef safe_get(items: list[str], index: int) -> Maybe[str]:\n    if index < len(items):",
+        "detail": "tests.tier1-errors.before.results",
+        "documentation": {}
+    },
+    {
+        "label": "double_parsed",
+        "kind": 2,
+        "importPath": "tests.tier1-errors.before.results",
+        "description": "tests.tier1-errors.before.results",
+        "peekOfCode": "def double_parsed(s: str) -> Result[int, str]:\n    return parse_int(s).map(lambda x: x * 2)\ndef chain_parse(s: str) -> Result[str, str]:\n    return parse_int(s).bind(lambda x: Success(str(x + 1)))\ndef safe_get(items: list[str], index: int) -> Maybe[str]:\n    if index < len(items):\n        return Some(items[index])\n    return Nothing\ndef with_default(s: str) -> int:\n    return parse_int(s).value_or(0)",
+        "detail": "tests.tier1-errors.before.results",
+        "documentation": {}
+    },
+    {
+        "label": "chain_parse",
+        "kind": 2,
+        "importPath": "tests.tier1-errors.before.results",
+        "description": "tests.tier1-errors.before.results",
+        "peekOfCode": "def chain_parse(s: str) -> Result[str, str]:\n    return parse_int(s).bind(lambda x: Success(str(x + 1)))\ndef safe_get(items: list[str], index: int) -> Maybe[str]:\n    if index < len(items):\n        return Some(items[index])\n    return Nothing\ndef with_default(s: str) -> int:\n    return parse_int(s).value_or(0)",
+        "detail": "tests.tier1-errors.before.results",
+        "documentation": {}
+    },
+    {
+        "label": "safe_get",
+        "kind": 2,
+        "importPath": "tests.tier1-errors.before.results",
+        "description": "tests.tier1-errors.before.results",
+        "peekOfCode": "def safe_get(items: list[str], index: int) -> Maybe[str]:\n    if index < len(items):\n        return Some(items[index])\n    return Nothing\ndef with_default(s: str) -> int:\n    return parse_int(s).value_or(0)",
+        "detail": "tests.tier1-errors.before.results",
+        "documentation": {}
+    },
+    {
+        "label": "with_default",
+        "kind": 2,
+        "importPath": "tests.tier1-errors.before.results",
+        "description": "tests.tier1-errors.before.results",
+        "peekOfCode": "def with_default(s: str) -> int:\n    return parse_int(s).value_or(0)",
+        "detail": "tests.tier1-errors.before.results",
+        "documentation": {}
+    },
+    {
+        "label": "Point",
+        "kind": 6,
+        "importPath": "tests.tier1-syntax.before.structs",
+        "description": "tests.tier1-syntax.before.structs",
+        "peekOfCode": "class Point:\n    x: float\n    y: float\n@dataclass(frozen=True)\nclass NamedEntity:\n    name: str\n    entity_type: str\n    score: float\n    tags: list[str]\ndef add_points(a: Point, b: Point) -> Point:",
+        "detail": "tests.tier1-syntax.before.structs",
+        "documentation": {}
+    },
+    {
+        "label": "NamedEntity",
+        "kind": 6,
+        "importPath": "tests.tier1-syntax.before.structs",
+        "description": "tests.tier1-syntax.before.structs",
+        "peekOfCode": "class NamedEntity:\n    name: str\n    entity_type: str\n    score: float\n    tags: list[str]\ndef add_points(a: Point, b: Point) -> Point:\n    return Point(x=a.x + b.x, y=a.y + b.y)\ndef distance(a: Point, b: Point) -> float:\n    dx: float = a.x - b.x\n    dy: float = a.y - b.y",
+        "detail": "tests.tier1-syntax.before.structs",
+        "documentation": {}
+    },
+    {
+        "label": "add_points",
+        "kind": 2,
+        "importPath": "tests.tier1-syntax.before.structs",
+        "description": "tests.tier1-syntax.before.structs",
+        "peekOfCode": "def add_points(a: Point, b: Point) -> Point:\n    return Point(x=a.x + b.x, y=a.y + b.y)\ndef distance(a: Point, b: Point) -> float:\n    dx: float = a.x - b.x\n    dy: float = a.y - b.y\n    return (dx * dx + dy * dy) ** 0.5\ndef validate_name(name: str) -> Result[str, str]:\n    cleaned: str = name.strip().upper()\n    if len(cleaned) == 0:\n        return Failure(\"Name cannot be empty\")",
+        "detail": "tests.tier1-syntax.before.structs",
+        "documentation": {}
+    },
+    {
+        "label": "distance",
+        "kind": 2,
+        "importPath": "tests.tier1-syntax.before.structs",
+        "description": "tests.tier1-syntax.before.structs",
+        "peekOfCode": "def distance(a: Point, b: Point) -> float:\n    dx: float = a.x - b.x\n    dy: float = a.y - b.y\n    return (dx * dx + dy * dy) ** 0.5\ndef validate_name(name: str) -> Result[str, str]:\n    cleaned: str = name.strip().upper()\n    if len(cleaned) == 0:\n        return Failure(\"Name cannot be empty\")\n    return Success(cleaned)",
+        "detail": "tests.tier1-syntax.before.structs",
+        "documentation": {}
+    },
+    {
+        "label": "validate_name",
+        "kind": 2,
+        "importPath": "tests.tier1-syntax.before.structs",
+        "description": "tests.tier1-syntax.before.structs",
+        "peekOfCode": "def validate_name(name: str) -> Result[str, str]:\n    cleaned: str = name.strip().upper()\n    if len(cleaned) == 0:\n        return Failure(\"Name cannot be empty\")\n    return Success(cleaned)",
+        "detail": "tests.tier1-syntax.before.structs",
+        "documentation": {}
+    },
+    {
+        "label": "map_type",
+        "kind": 2,
+        "importPath": "refactory_translate",
+        "description": "refactory_translate",
+        "peekOfCode": "def map_type(py_type: str, is_param: bool = False) -> str:\n    \"\"\"Translate a Python type annotation to Rust.\"\"\"\n    t = py_type.strip()\n    if is_param and t in PARAM_OVERRIDES:\n        return PARAM_OVERRIDES[t]\n    if t in PRIMITIVE_MAP:\n        return PRIMITIVE_MAP[t]\n    # Result[T, E] → Result<T, E>\n    m = re.match(r\"^Result\\[(.+),\\s*(.+)\\]$\", t)\n    if m:",
+        "detail": "refactory_translate",
+        "documentation": {}
+    },
+    {
+        "label": "annotation_to_str",
+        "kind": 2,
+        "importPath": "refactory_translate",
+        "description": "refactory_translate",
+        "peekOfCode": "def annotation_to_str(node: ast.expr) -> str:\n    \"\"\"Convert an AST annotation node to a string representation.\"\"\"\n    return ast.unparse(node)\n# ── Expression Translation ──────────────────────────────────────────\ndef translate_expr(node: ast.expr, indent: int = 0) -> str:\n    \"\"\"Translate a Python expression to Rust.\"\"\"\n    if isinstance(node, ast.Constant):\n        if isinstance(node.value, str):\n            return f'\"{node.value}\".to_string()'\n        if isinstance(node.value, bool):",
+        "detail": "refactory_translate",
+        "documentation": {}
+    },
+    {
+        "label": "translate_expr",
+        "kind": 2,
+        "importPath": "refactory_translate",
+        "description": "refactory_translate",
+        "peekOfCode": "def translate_expr(node: ast.expr, indent: int = 0) -> str:\n    \"\"\"Translate a Python expression to Rust.\"\"\"\n    if isinstance(node, ast.Constant):\n        if isinstance(node.value, str):\n            return f'\"{node.value}\".to_string()'\n        if isinstance(node.value, bool):\n            return \"true\" if node.value else \"false\"\n        if isinstance(node.value, (int, float)):\n            v = str(node.value)\n            if isinstance(node.value, float) and \".\" not in v:",
+        "detail": "refactory_translate",
+        "documentation": {}
+    },
+    {
+        "label": "translate_call",
+        "kind": 2,
+        "importPath": "refactory_translate",
+        "description": "refactory_translate",
+        "peekOfCode": "def translate_call(node: ast.Call) -> str:\n    \"\"\"Translate a function/method call.\"\"\"\n    args = \", \".join(translate_expr(a) for a in node.args)\n    kwargs = \", \".join(f\"{kw.arg}: {translate_expr(kw.value)}\" for kw in node.keywords if kw.arg)\n    if isinstance(node.func, ast.Name):\n        name = node.func.id\n        if name == \"Success\":\n            return f\"Ok({args})\"\n        if name == \"Failure\":\n            return f\"Err({args})\"",
+        "detail": "refactory_translate",
+        "documentation": {}
+    },
+    {
+        "label": "translate_stmt",
+        "kind": 2,
+        "importPath": "refactory_translate",
+        "description": "refactory_translate",
+        "peekOfCode": "def translate_stmt(node: ast.stmt, indent: int = 1) -> str:\n    \"\"\"Translate a Python statement to Rust.\"\"\"\n    pad = \"    \" * indent\n    if isinstance(node, ast.Return):\n        if node.value:\n            val = translate_expr(node.value)\n            # Check if this is the last statement via the _is_last_stmt marker\n            if getattr(node, '_is_last_stmt', False):\n                return f\"{pad}{val}\"\n            return f\"{pad}return {val};\"",
+        "detail": "refactory_translate",
+        "documentation": {}
+    },
+    {
+        "label": "translate_dataclass",
+        "kind": 2,
+        "importPath": "refactory_translate",
+        "description": "refactory_translate",
+        "peekOfCode": "def translate_dataclass(node: ast.ClassDef) -> str:\n    \"\"\"Translate a frozen dataclass to a Rust struct.\"\"\"\n    fields = []\n    methods = []\n    for item in node.body:\n        if isinstance(item, ast.AnnAssign) and isinstance(item.target, ast.Name):\n            fname = item.target.id\n            ftype = map_type(annotation_to_str(item.annotation))\n            default = \"\"\n            if item.value:",
+        "detail": "refactory_translate",
+        "documentation": {}
+    },
+    {
+        "label": "translate_function",
+        "kind": 2,
+        "importPath": "refactory_translate",
+        "description": "refactory_translate",
+        "peekOfCode": "def translate_function(node: ast.FunctionDef, is_method: bool = False, struct_name: str = \"\") -> str:\n    \"\"\"Translate a function definition to Rust.\"\"\"\n    params = []\n    for arg in node.args.args:\n        if arg.arg == \"self\":\n            params.append(\"&self\")\n            continue\n        pname = arg.arg\n        if arg.annotation:\n            ptype = map_type(annotation_to_str(arg.annotation), is_param=True)",
+        "detail": "refactory_translate",
+        "documentation": {}
+    },
+    {
+        "label": "translate_module",
+        "kind": 2,
+        "importPath": "refactory_translate",
+        "description": "refactory_translate",
+        "peekOfCode": "def translate_module(source: str) -> str:\n    \"\"\"Translate a complete Python-as-Rust module to Rust.\"\"\"\n    tree = ast.parse(source)\n    parts = []\n    imports_needed = set()\n    for node in tree.body:\n        # Skip imports and __future__ annotations\n        if isinstance(node, (ast.Import, ast.ImportFrom)):\n            # Track what we need\n            if isinstance(node, ast.ImportFrom) and node.module:",
+        "detail": "refactory_translate",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "refactory_translate",
+        "description": "refactory_translate",
+        "peekOfCode": "def main():\n    if len(sys.argv) < 2:\n        print(\"Usage: python refactory_translate.py <input.py> [output.rs]\")\n        sys.exit(1)\n    input_path = Path(sys.argv[1])\n    source = input_path.read_text()\n    rust = translate_module(source)\n    if len(sys.argv) >= 3:\n        output_path = Path(sys.argv[2])\n        output_path.parent.mkdir(parents=True, exist_ok=True)",
+        "detail": "refactory_translate",
+        "documentation": {}
+    },
+    {
+        "label": "PRIMITIVE_MAP",
+        "kind": 5,
+        "importPath": "refactory_translate",
+        "description": "refactory_translate",
+        "peekOfCode": "PRIMITIVE_MAP = {\n    \"str\": \"String\",\n    \"int\": \"i64\",\n    \"float\": \"f64\",\n    \"bool\": \"bool\",\n    \"bytes\": \"Vec<u8>\",\n    \"None\": \"()\",\n}\nPARAM_OVERRIDES = {\n    \"str\": \"&str\",",
+        "detail": "refactory_translate",
+        "documentation": {}
+    },
+    {
+        "label": "PARAM_OVERRIDES",
+        "kind": 5,
+        "importPath": "refactory_translate",
+        "description": "refactory_translate",
+        "peekOfCode": "PARAM_OVERRIDES = {\n    \"str\": \"&str\",\n}\ndef map_type(py_type: str, is_param: bool = False) -> str:\n    \"\"\"Translate a Python type annotation to Rust.\"\"\"\n    t = py_type.strip()\n    if is_param and t in PARAM_OVERRIDES:\n        return PARAM_OVERRIDES[t]\n    if t in PRIMITIVE_MAP:\n        return PRIMITIVE_MAP[t]",
+        "detail": "refactory_translate",
+        "documentation": {}
+    }
+]

@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "codemod": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@codemod.com/cli",
+        "mcp"
+      ]
+    }
+  }
+}

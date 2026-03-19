@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__plugin_github_github__list_issues",
+      "Bash(gh repo:*)",
+      "Bash(for repo:*)",
+      "mcp__plugin_github_github__search_repositories",
+      "mcp__plugin_github_github__get_me",
+      "mcp__plugin_github_github__get_file_contents",
+      "mcp__plugin_github_github__search_issues"
+    ]
+  }
+}

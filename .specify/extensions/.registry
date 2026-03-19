@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.0",
+  "extensions": {
+    "verify": {
+      "version": "1.0.0",
+      "source": "local",
+      "manifest_hash": "sha256:4baa329349fffb5598a7bd41f958cf193aac77dd624c1c64799de052995ca29a",
+      "enabled": true,
+      "registered_commands": {
+        "claude": [
+          "speckit.verify.run",
+          "speckit.verify"
+        ],
+        "copilot": [
+          "speckit.verify.run",
+          "speckit.verify"
+        ],
+        "amp": [
+          "speckit.verify.run",
+          "speckit.verify"
+        ]
+      },
+      "installed_at": "2026-03-13T02:15:46.485992+00:00"
+    },
+    "sync": {
+      "version": "0.1.0",
+      "source": "local",
+      "manifest_hash": "sha256:e5f4b9456751e1251693feae987401b3583d67770a43d370741c35182a46d06f",
+      "enabled": true,
+      "registered_commands": {
+        "claude": [
+          "speckit.sync.analyze",
+          "speckit.drift",
+          "speckit.sync.propose",
+          "speckit.sync.apply",
+          "speckit.sync.conflicts",
+          "speckit.sync.backfill"
+        ],
+        "copilot": [
+          "speckit.sync.analyze",
+          "speckit.drift",
+          "speckit.sync.propose",
+          "speckit.sync.apply",
+          "speckit.sync.conflicts",
+          "speckit.sync.backfill"
+        ],
+        "amp": [
+          "speckit.sync.analyze",
+          "speckit.drift",
+          "speckit.sync.propose",
+          "speckit.sync.apply",
+          "speckit.sync.conflicts",
+          "speckit.sync.backfill"
+        ]
+      },
+      "installed_at": "2026-03-13T02:15:53.232374+00:00"
+    },
+    "review": {
+      "version": "1.0.0",
+      "source": "local",
+      "manifest_hash": "sha256:0cbd39c71fbf9274e2d313d2ec8470c758759dea9e15ca162be2ae94612fc3f8",
+      "enabled": true,
+      "registered_commands": {
+        "claude": [
+          "speckit.review.run",
+          "speckit.review",
+          "speckit.review.code",
+          "speckit.review.comments",
+          "speckit.review.tests",
+          "speckit.review.errors",
+          "speckit.review.types",
+          "speckit.review.simplify"
+        ],
+        "copilot": [
+          "speckit.review.run",
+          "speckit.review",
+          "speckit.review.code",
+          "speckit.review.comments",
+          "speckit.review.tests",
+          "speckit.review.errors",
+          "speckit.review.types",
+          "speckit.review.simplify"
+        ],
+        "amp": [
+          "speckit.review.run",
+          "speckit.review",
+          "speckit.review.code",
+          "speckit.review.comments",
+          "speckit.review.tests",
+          "speckit.review.errors",
+          "speckit.review.types",
+          "speckit.review.simplify"
+        ]
+      },
+      "installed_at": "2026-03-13T02:15:59.989789+00:00"
+    },
+    "workflows": {
+      "version": "3.0.0",
+      "source": "local",
+      "manifest_hash": "sha256:b8b143d93c148887b23dcee90397a2a485ebd52de3ed721acd12e23f12ec6b0f",
+      "enabled": true,
+      "registered_commands": {
+        "claude": [
+          "speckit.workflows.bugfix",
+          "speckit.bugfix",
+          "speckit.workflows.hotfix",
+          "speckit.hotfix",
+          "speckit.workflows.enhance",
+          "speckit.enhance",
+          "speckit.workflows.refactor",
+          "speckit.refactor",
+          "speckit.workflows.deprecate",
+          "speckit.deprecate",
+          "speckit.workflows.modify",
+          "speckit.modify",
+          "speckit.workflows.baseline",
+          "speckit.baseline",
+          "speckit.workflows.cleanup",
+          "speckit.cleanup",
+          "speckit.workflows.review",
+          "speckit.review",
+          "speckit.workflows.phasestoissues",
+          "speckit.phasestoissues",
+          "speckit.workflows.incorporate",
+          "speckit.incorporate"
+        ],
+        "copilot": [
+          "speckit.workflows.bugfix",
+          "speckit.bugfix",
+          "speckit.workflows.hotfix",
+          "speckit.hotfix",
+          "speckit.workflows.enhance",
+          "speckit.enhance",
+          "speckit.workflows.refactor",
+          "speckit.refactor",
+          "speckit.workflows.deprecate",
+          "speckit.deprecate",
+          "speckit.workflows.modify",
+          "speckit.modify",
+          "speckit.workflows.baseline",
+          "speckit.baseline",
+          "speckit.workflows.cleanup",
+          "speckit.cleanup",
+          "speckit.workflows.review",
+          "speckit.review",
+          "speckit.workflows.phasestoissues",
+          "speckit.phasestoissues",
+          "speckit.workflows.incorporate",
+          "speckit.incorporate"
+        ],
+        "amp": [
+          "speckit.workflows.bugfix",
+          "speckit.bugfix",
+          "speckit.workflows.hotfix",
+          "speckit.hotfix",
+          "speckit.workflows.enhance",
+          "speckit.enhance",
+          "speckit.workflows.refactor",
+          "speckit.refactor",
+          "speckit.workflows.deprecate",
+          "speckit.deprecate",
+          "speckit.workflows.modify",
+          "speckit.modify",
+          "speckit.workflows.baseline",
+          "speckit.baseline",
+          "speckit.workflows.cleanup",
+          "speckit.cleanup",
+          "speckit.workflows.review",
+          "speckit.review",
+          "speckit.workflows.phasestoissues",
+          "speckit.phasestoissues",
+          "speckit.workflows.incorporate",
+          "speckit.incorporate"
+        ]
+      },
+      "installed_at": "2026-03-13T18:37:55.434731+00:00"
+    }
+  }
+}
