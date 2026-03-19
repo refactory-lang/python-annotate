@@ -1,0 +1,290 @@
+# When an issue is labeled 'spec-ready':
+#   1. Detect issue type (feature, bug, enhancement)
+#   2. Append type-appropriate Copilot instructions to the issue body
+#   3. Assign Copilot so it picks up the issue with full context
+#
+# Routing:
+#   - Feature / needs-spec / Phase title  → speckit.specify (new spec)
+#   - Bug                                 → speckit.workflows.bugfix
+#   - Enhancement                         → speckit.workflows.enhance
+
+name: Spec Ready — Assign to Copilot
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  issues: write
+
+jobs:
+  assign-copilot:
+    if: github.event.label.name == 'spec-ready'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Route by issue type, append instructions, assign Copilot
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const labels = issue.labels.map(l => l.name.toLowerCase());
+            const title = issue.title || '';
+            const issueType = issue.issue_type?.name || '';
+
+            // --- Classify the issue ---
+
+            const isBug =
+              issueType === 'Bug' ||
+              labels.includes('bug');
+
+            const isEnhancement =
+              labels.includes('enhancement') ||
+              (issueType === 'Enhancement');
+
+            const isFeature =
+              issueType === 'Feature' ||
+              labels.includes('feature') ||
+              labels.includes('needs-spec') ||
+              title.startsWith('Milestone ');
+
+            // Skip unsupported types
+            const isUnsupported =
+              labels.includes('question') ||
+              labels.includes('support') ||
+              labels.includes('documentation') ||
+              issueType === 'Task';
+
+            if (isUnsupported && !isBug && !isEnhancement && !isFeature) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: [
+                  `### Skipped: unsupported issue type`,
+                  ``,
+                  `The \`spec-ready\` label was added, but this issue type is not supported for automated spec workflows.`,
+                  `Supported types: **feature** (\`needs-spec\`), **bug**, **enhancement**.`,
+                ].join('\n'),
+              });
+
+              await github.rest.issues.removeLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                name: 'spec-ready',
+              });
+              return;
+            }
+
+            // --- Determine the workflow and instructions ---
+
+            let workflow, workflowLabel, copilotInstructions;
+
+            if (isBug) {
+              workflow = 'bugfix';
+              workflowLabel = 'Bug Fix';
+              copilotInstructions = [
+                ``,
+                `---`,
+                ``,
+                `## Copilot Instructions`,
+                ``,
+                `This is a **bug**. When assigned, run the speckit bugfix workflow:`,
+                ``,
+                `### 1. Run the bugfix workflow`,
+                `Execute the speckit bugfix workflow command in the repo:`,
+                '```',
+                `/speckit.workflows.bugfix ${issue.html_url}`,
+                '```',
+                ``,
+                `This workflow will:`,
+                `- Analyze the bug report from this issue`,
+                `- Create a bugfix branch`,
+                `- Generate a targeted spec for the fix`,
+                `- Produce a plan and implementation tasks`,
+                ``,
+                `### 2. Use the issue context`,
+                `The issue body above contains the bug description, reproduction steps, and expected behavior.`,
+                `Pass all of this as context to the workflow.`,
+                ``,
+                `### 3. Run speckit.clarify`,
+                `After the spec/fix is created, run \`/speckit.clarify\` to identify ambiguities and open questions.`,
+                ``,
+                `### 4. Open a PR`,
+                `Create a pull request with the fix. Title: \`fix: <issue title>\``,
+                ``,
+                `### 5. Post clarification questions to the PR`,
+                `Take every question or ambiguity identified by \`/speckit.clarify\` and post each one as a **separate PR review comment**.`,
+                `Format each comment as:`,
+                '```',
+                `**[NEEDS CLARIFICATION]**: <question>`,
+                ``,
+                `**Context**: <relevant spec section or code>`,
+                `**Options**:`,
+                `- A: <option>`,
+                `- B: <option>`,
+                '```',
+                `This allows the human reviewer to respond to each question individually in the PR review.`,
+                ``,
+                `### 6. Update this issue`,
+                `- Remove labels: \`spec-ready\``,
+                `- Add label: \`in-progress\``,
+                `- Comment with the branch name, spec location, and PR link`,
+              ].join('\n');
+
+            } else if (isEnhancement) {
+              workflow = 'enhance';
+              workflowLabel = 'Enhancement';
+              copilotInstructions = [
+                ``,
+                `---`,
+                ``,
+                `## Copilot Instructions`,
+                ``,
+                `This is an **enhancement**. When assigned, run the speckit enhance workflow:`,
+                ``,
+                `### 1. Run the enhance workflow`,
+                `Execute the speckit enhance workflow command in the repo:`,
+                '```',
+                `/speckit.workflows.enhance ${issue.html_url}`,
+                '```',
+                ``,
+                `This workflow will:`,
+                `- Analyze the enhancement request from this issue`,
+                `- Identify the existing feature being enhanced`,
+                `- Create a spec amendment or new spec for the enhancement`,
+                `- Generate an implementation plan scoped to the change`,
+                ``,
+                `### 2. Use the issue context`,
+                `The issue body above contains the enhancement description, motivation, and scope.`,
+                `Pass all of this as context to the workflow.`,
+                ``,
+                `### 3. Run speckit.clarify`,
+                `After the spec is created, run \`/speckit.clarify\` to identify ambiguities and open questions.`,
+                ``,
+                `### 4. Open a PR`,
+                `Create a pull request with the enhancement. Title: \`enhance: <issue title>\``,
+                ``,
+                `### 5. Post clarification questions to the PR`,
+                `Take every question or ambiguity identified by \`/speckit.clarify\` and post each one as a **separate PR review comment**.`,
+                `Format each comment as:`,
+                '```',
+                `**[NEEDS CLARIFICATION]**: <question>`,
+                ``,
+                `**Context**: <relevant spec section or code>`,
+                `**Options**:`,
+                `- A: <option>`,
+                `- B: <option>`,
+                '```',
+                `This allows the human reviewer to respond to each question individually in the PR review.`,
+                ``,
+                `### 6. Update this issue`,
+                `- Remove labels: \`spec-ready\``,
+                `- Add label: \`in-progress\``,
+                `- Comment with the branch name, spec location, and PR link`,
+              ].join('\n');
+
+            } else {
+              // Feature (default)
+              workflow = 'specify';
+              workflowLabel = 'Feature Specification';
+              copilotInstructions = [
+                ``,
+                `---`,
+                ``,
+                `## Copilot Instructions`,
+                ``,
+                `This is a **feature**. When assigned, create a speckit specification:`,
+                ``,
+                `### 1. Create the feature branch`,
+                `Run from the repo root:`,
+                '```bash',
+                `.specify/scripts/bash/create-new-feature.sh "" --json --short-name "<SHORT_NAME>" "<ISSUE_TITLE>"`,
+                '```',
+                `- Extract a 2-4 word \`<SHORT_NAME>\` from this issue title (e.g., \`tier2-control-flow\`)`,
+                `- Do NOT pass \`--number\` — the script auto-detects the next available number`,
+                `- Parse the JSON output to get \`BRANCH_NAME\` and \`SPEC_FILE\` paths`,
+                ``,
+                `### 2. Write the specification`,
+                `Write \`specs/<branch>/spec.md\` using \`.specify/templates/spec-template.md\` as the template.`,
+                `Use the **Overview**, **Scope**, and **Success Criteria** sections from this issue as input.`,
+                ``,
+                `The spec must:`,
+                `- Focus on WHAT and WHY — no implementation details (languages, frameworks, APIs)`,
+                `- Include functional requirements that are testable and unambiguous`,
+                `- Include success criteria that are measurable and technology-agnostic`,
+                `- Reference this issue URL in the spec`,
+                `- Include dependencies from the **Context** section`,
+                ``,
+                `### 3. Create the quality checklist`,
+                `Write \`specs/<branch>/checklists/requirements.md\` validating:`,
+                `- No implementation details in specification`,
+                `- All requirements are testable`,
+                `- Success criteria are measurable`,
+                `- Scope is clearly bounded`,
+                ``,
+                `### 4. Run speckit.clarify`,
+                `After writing the spec, run \`/speckit.clarify\` to identify ambiguities, missing details, and open questions in the specification.`,
+                ``,
+                `### 5. Open a PR`,
+                `Create a pull request with the spec for review. Title: \`spec: <issue title>\``,
+                ``,
+                `### 6. Post clarification questions to the PR`,
+                `Take every question or ambiguity identified by \`/speckit.clarify\` and post each one as a **separate PR review comment** on the relevant line of \`spec.md\`.`,
+                `Format each comment as:`,
+                '```',
+                `**[NEEDS CLARIFICATION]**: <question>`,
+                ``,
+                `**Context**: <relevant spec section>`,
+                `**Options**:`,
+                `- A: <option>`,
+                `- B: <option>`,
+                '```',
+                `This allows the human reviewer to respond to each question individually in the PR review.`,
+                ``,
+                `### 7. Update this issue`,
+                `- Remove labels: \`needs-spec\`, \`spec-ready\``,
+                `- Add label: \`has-spec\` (create if it doesn't exist)`,
+                `- Comment with: spec location, PR link, and number of clarification questions pending`,
+              ].join('\n');
+            }
+
+            // --- Append instructions (idempotent) ---
+
+            const currentBody = issue.body || '';
+
+            if (currentBody.includes('## Copilot Instructions')) {
+              core.info('Copilot instructions already present, skipping append');
+            } else {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: currentBody + copilotInstructions,
+              });
+            }
+
+            // --- Assign Copilot ---
+
+            await github.rest.issues.addAssignees({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              assignees: ['copilot'],
+            });
+
+            // --- Comment ---
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: [
+                `### ${workflowLabel} in progress`,
+                ``,
+                `Copilot has been assigned to handle this ${workflow === 'specify' ? 'feature specification' : workflow} workflow.`,
+                `Instructions have been appended to the issue body.`,
+                ``,
+                `**Manual alternative**: Run \`/${workflow === 'specify' ? 'spec-from-issue' : 'speckit.workflows.' + workflow} ${issue.html_url}\` in a repo checkout.`,
+              ].join('\n'),
+            });
