@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import subprocess
+import sys
 from pathlib import Path
 
 
@@ -24,7 +25,7 @@ def verify_with_mypy(
         return True, []
 
     cmd = [
-        "python",
+        sys.executable,
         "-m",
         "mypy",
         "--strict",

@@ -70,7 +70,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.verbose:
         print(
-            f"refactory-annotate v{_get_version()}",
+            f"python-annotate v{_get_version()}",
             file=sys.stderr,
         )
 
