@@ -339,5 +339,5 @@ def collect_required_imports(type_strings: list[str]) -> list[str]:
 
 
 def _path_to_uri(path: Path) -> str:
-    """Convert an absolute Path to a ``file://`` URI."""
-    return path.as_uri()
+    """Convert a Path to a ``file://`` URI, resolving it to an absolute path."""
+    return path.resolve().as_uri()
