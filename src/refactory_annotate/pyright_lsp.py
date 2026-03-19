@@ -102,11 +102,24 @@ class PyrightClient:
 
         with self._lock:
             event = self._response_events.get(rid)
-        if event is None or not event.wait(timeout=self.REQUEST_TIMEOUT):
+        if event is None:
+            # Clean up any stray response/event entries for this request ID.
+            with self._lock:
+                self._responses.pop(rid, None)
+                self._response_events.pop(rid, None)
+            return None
+
+        if not event.wait(timeout=self.REQUEST_TIMEOUT):
+            # Timed out waiting for the response; drop any stored state.
+            with self._lock:
+                self._responses.pop(rid, None)
+                self._response_events.pop(rid, None)
             return None
 
         with self._lock:
-            resp = self._responses.get(rid)
+            # Consume and remove the stored response and event for this request.
+            resp = self._responses.pop(rid, None)
+            self._response_events.pop(rid, None)
         if not resp or not resp.get("result"):
             return None
 
