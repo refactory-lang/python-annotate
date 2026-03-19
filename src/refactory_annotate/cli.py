@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+from pathlib import Path
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -59,23 +60,72 @@ def _get_version() -> str:
 
 
 def main(argv: list[str] | None = None) -> int:
-    """Main entry point."""
+    """Main entry point for the python-annotate CLI.
+
+    Returns:
+        0 on success (annotations inserted and mypy passes, or no changes
+        needed), 1 on any error (mypy failures, I/O errors, etc.).
+    """
     args = parse_args(argv)
 
     if args.verbose:
-        print(f"refactory-annotate v{_get_version()}")
-        print(f"Paths: {args.paths}")
-        print(f"Verify: {args.verify}")
-        print(f"Dry run: {args.dry_run}")
+        print(
+            f"refactory-annotate v{_get_version()}",
+            file=sys.stderr,
+        )
 
-    # TODO: Implement the annotation pipeline:
-    # 1. Run pyright to infer types
-    # 2. Parse pyright output to extract type information
-    # 3. Use libcst to insert PEP 484 annotations
-    # 4. Verify with mypy --strict (unless --no-verify)
+    from refactory_annotate.pipeline import annotate_paths
 
-    print("refactory-annotate: not yet implemented")
-    return 1
+    paths = [Path(p) for p in args.paths]
+
+    # Validate paths exist
+    bad = [p for p in paths if not p.exists()]
+    if bad:
+        for p in bad:
+            print(f"error: path not found: {p}", file=sys.stderr)
+        return 1
+
+    report = annotate_paths(
+        paths,
+        dry_run=args.dry_run,
+        verify=args.verify,
+        verbose=args.verbose,
+    )
+
+    # Summary output
+    if not args.dry_run:
+        inserted = report.inserted
+        unannotatable = len(report.unannotatable)
+        if inserted or unannotatable:
+            print(
+                f"Inserted {inserted} annotation(s); "
+                f"{unannotatable} location(s) not inferrable."
+            )
+        else:
+            print("No annotations needed — files already fully annotated.")
+
+    if report.unannotatable:
+        print(
+            f"\nUnannotatable locations ({len(report.unannotatable)}):",
+            file=sys.stderr,
+        )
+        for loc in report.unannotatable:
+            print(
+                f"  {loc.file}:{loc.line + 1}: "
+                f"{loc.kind.value} '{loc.name}' — {loc.reason}",
+                file=sys.stderr,
+            )
+
+    if report.mypy_errors:
+        print(
+            f"\nmypy --strict reported {len(report.mypy_errors)} error(s):",
+            file=sys.stderr,
+        )
+        for err in report.mypy_errors:
+            print(f"  {err}", file=sys.stderr)
+        return 1
+
+    return 0
 
 
 if __name__ == "__main__":
