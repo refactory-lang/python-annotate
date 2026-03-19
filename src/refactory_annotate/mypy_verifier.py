@@ -41,10 +41,15 @@ def verify_with_mypy(
     )
 
     errors: list[str] = []
-    for line in result.stdout.splitlines():
-        line = line.strip()
-        if line and not line.startswith("Success"):
-            errors.append(line)
+    # Collect diagnostics from both stdout and stderr. mypy may emit
+    # configuration/usage errors (exit code 2) primarily on stderr.
+    for stream in (result.stdout, result.stderr):
+        if not stream:
+            continue
+        for line in stream.splitlines():
+            line = line.strip()
+            if line and not line.startswith("Success"):
+                errors.append(line)
 
     # mypy exits 0 on success, 1 on type errors, 2 on usage errors
     success = result.returncode == 0
