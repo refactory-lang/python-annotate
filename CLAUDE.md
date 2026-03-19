@@ -61,3 +61,18 @@ ruff check src/
 - Targets Python 3.11+
 - Linting via `ruff` with strict annotation rules (`ANN` select)
 - Type checking via `mypy --strict`
+
+
+### Speckit Workflow
+
+This repo uses [speckit](https://github.com/speckit) for specification-driven development.
+
+- **Specs**: `specs/<NNN-feature-name>/spec.md` — feature specifications
+- **Plans**: `specs/<NNN-feature-name>/plan.md` — implementation plans with tasks
+- **Checklists**: `specs/<NNN-feature-name>/checklists/` — quality gates
+- **Templates**: `.specify/templates/` — spec, plan, task, checklist templates
+- **Extensions**: `.specify/extensions/` — verify, sync, review, workflow hooks
+
+**Branch convention**: Feature branches are named `<NNN>-<short-name>` matching the spec directory (e.g., `001-milestone1-pipeline`).
+
+**Issue → Spec flow**: Issues labeled `spec-ready` trigger the `spec-ready-notify` workflow, which assigns Copilot to run the speckit workflow and produce a spec + plan + tasks.
