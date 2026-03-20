@@ -30,6 +30,7 @@ permissions:
   contents: write
   issues: write
   pull-requests: write
+  copilot: write
 
 env:
   SPEC_READY_AGENT: ${{ vars.SPEC_READY_AGENT || 'copilot' }}
@@ -68,7 +69,7 @@ jobs:
                 body: `### Skipped: unsupported issue type\n\nThe \`spec-ready\` label was added, but this issue type is not supported.\nSupported: **feature**, **bug**, **hotfix**, **enhancement**, **refactor**, **deprecation**, **modification**.`,
               });
               await github.rest.issues.removeLabel({
-                owner: context.repo.owner, repo: context.repo.repo, issue_number: issue.number, name: 'ready-to-spec',
+                owner: context.repo.owner, repo: context.repo.repo, issue_number: issue.number, name: 'spec-ready',
               });
               return;
             }
@@ -98,7 +99,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          submodules: recursive
 
       - name: Create branch via spec-kit
         if: steps.classify.outputs.skip != 'true'
@@ -109,12 +109,12 @@ jobs:
           ISSUE_TITLE: ${{ steps.classify.outputs.issue_title }}
         run: |
           # Determine script location
-          # Extension scripts are in speckit-shared/.specify/extensions/workflows/scripts/bash/
-          # Feature script is in speckit-shared/.specify/scripts/bash/
+          # Extension scripts are in .specify/extensions/workflows/scripts/bash/
+          # Feature script is in .specify/scripts/bash/
           if [ "$WORKFLOW" = "feature" ]; then
-            SCRIPT="speckit-shared/.specify/scripts/bash/${CREATE_SCRIPT}"
+            SCRIPT=".specify/scripts/bash/${CREATE_SCRIPT}"
           else
-            SCRIPT="speckit-shared/.specify/extensions/workflows/scripts/bash/${CREATE_SCRIPT}"
+            SCRIPT=".specify/extensions/workflows/scripts/bash/${CREATE_SCRIPT}"
           fi
 
           if [ ! -f "$SCRIPT" ]; then
@@ -276,13 +276,18 @@ jobs:
 
             // --- Assign agent ---
 
+            // First try addAssignees (works for copilot with copilot: write permission)
             try {
-              await github.rest.issues.addAssignees({
+              const result = await github.rest.issues.addAssignees({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issue.number,
                 assignees: [AGENT],
               });
+              const assigned = result.data.assignees?.map(a => a.login) || [];
+              if (!assigned.includes(AGENT)) {
+                core.warning(`addAssignees succeeded but ${AGENT} not in assignees list (silently ignored). Check org Copilot settings.`);
+              }
             } catch (e) {
               core.warning(`Could not assign ${AGENT}: ${e.message}`);
             }
@@ -363,12 +368,16 @@ jobs:
             }
 
             try {
-              await github.rest.issues.addAssignees({
+              const result = await github.rest.issues.addAssignees({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issue.number,
                 assignees: [AGENT],
               });
+              const assigned = result.data.assignees?.map(a => a.login) || [];
+              if (!assigned.includes(AGENT)) {
+                core.warning(`addAssignees succeeded but ${AGENT} not in assignees list (silently ignored). Check org Copilot settings.`);
+              }
             } catch (e) {
               core.warning(`Could not assign ${AGENT}: ${e.message}`);
             }
