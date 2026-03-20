@@ -160,92 +160,83 @@ jobs:
             git commit -m "spec: scaffold for ${ISSUE_TITLE}"
           git push origin "$BRANCH"
 
-      # --- Step 4: Create draft PR ---
-      - name: Create draft PR
-        if: steps.classify.outputs.skip != 'true' && steps.create.outputs.skip != 'true'
-        id: pr
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const workflow = '${{ steps.classify.outputs.workflow }}';
-            const label = '${{ steps.classify.outputs.label }}';
-            const branch = '${{ steps.create.outputs.branch }}';
-            const issueNumber = ${{ steps.classify.outputs.issue_number }};
-            const issueTitle = `${{ steps.classify.outputs.issue_title }}`;
-
-            const { data: pr } = await github.rest.pulls.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: `${workflow}: ${issueTitle}`,
-              head: branch,
-              base: 'main',
-              draft: true,
-              body: [
-                `## ${label}`,
-                ``,
-                `Closes #${issueNumber}`,
-                ``,
-                `**Branch**: \`${branch}\``,
-                `**Workflow**: \`${workflow}\``,
-                ``,
-                `---`,
-                `*Created automatically by ready-to-spec workflow. Agent will write the spec, run clarify, and post questions here.*`,
-              ].join('\n'),
-            });
-
-            core.setOutput('pr_number', String(pr.number));
-            core.setOutput('pr_url', pr.html_url);
-
-      # --- Step 5: Append instructions to PR body and update issue ---
-      - name: Update PR body with agent instructions, link issue
+      # --- Step 4: Link branch to issue ---
+      - name: Link branch to issue
         if: steps.classify.outputs.skip != 'true' && steps.create.outputs.skip != 'true'
         uses: actions/github-script@v7
         with:
           script: |
             const issue = context.payload.issue;
-            const AGENT = process.env.SPEC_READY_AGENT || 'copilot';
+            const branch = '${{ steps.create.outputs.branch }}';
+
+            // Link the branch to the issue via the GraphQL API
+            // This makes the branch appear in the issue's "Development" sidebar
+            try {
+              const repoResult = await github.graphql(`
+                query($owner: String!, $name: String!) {
+                  repository(owner: $owner, name: $name) { id }
+                }
+              `, { owner: context.repo.owner, name: context.repo.repo });
+
+              await github.graphql(`
+                mutation($issueId: ID!, $branchName: String!, $repositoryId: ID!) {
+                  createLinkedBranch(input: {
+                    issueId: "${issue.node_id}",
+                    name: $branchName,
+                    oid: "${context.sha}",
+                    repositoryId: $repositoryId
+                  }) {
+                    linkedBranch { id }
+                  }
+                }
+              `, {
+                issueId: issue.node_id,
+                branchName: branch,
+                repositoryId: repoResult.repository.id,
+              });
+              core.info(`Linked branch ${branch} to issue #${issue.number}`);
+            } catch (e) {
+              core.warning(`Could not link branch to issue: ${e.message}`);
+            }
+
+      # --- Step 5: Update issue with branch info and instructions ---
+      - name: Update issue and comment
+        if: steps.classify.outputs.skip != 'true' && steps.create.outputs.skip != 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
             const workflow = '${{ steps.classify.outputs.workflow }}';
             const label = '${{ steps.classify.outputs.label }}';
             const command = '${{ steps.classify.outputs.command }}';
             const branch = '${{ steps.create.outputs.branch }}';
-            const prNumber = ${{ steps.pr.outputs.pr_number }};
-            const prUrl = '${{ steps.pr.outputs.pr_url }}';
             const issueUrl = '${{ steps.classify.outputs.issue_url }}';
 
-            // --- Append agent instructions to the PR body (not the issue) ---
+            // --- Append agent instructions to the issue body ---
 
-            const prInstructions = [
-              `## ${label}`,
-              ``,
-              `Closes #${issue.number}`,
-              ``,
-              `**Branch**: \`${branch}\``,
-              `**Workflow**: \`${workflow}\``,
-              `**Issue**: ${issueUrl}`,
+            const instructions = [
               ``,
               `---`,
               ``,
               `## Copilot Instructions`,
               ``,
-              `This is a **${label.toLowerCase()}**. The branch and spec structure are ready.`,
+              `This is a **${label.toLowerCase()}**. The branch \`${branch}\` has been created with spec templates.`,
               ``,
-              `### 1. Read the issue`,
-              `The issue at ${issueUrl} contains the full requirements.`,
-              `Use it as the primary input for writing the spec.`,
-              ``,
-              `### 2. Write the spec`,
-              `Write the spec in \`specs/\` using the templates already created on this branch.`,
+              `### 1. Write the spec`,
+              `Check out branch \`${branch}\` and write the spec using the templates already created.`,
+              `Use the issue description above as the primary input.`,
               ``,
               `Run:`,
               '```',
+              `git checkout ${branch}`,
               `${command} ${issueUrl}`,
               '```',
               ``,
-              `### 3. Run /speckit.clarify`,
+              `### 2. Run /speckit.clarify`,
               `After writing the spec, run \`/speckit.clarify\` to surface ambiguities, missing details, and open questions.`,
               ``,
-              `### 4. Post ALL clarification questions as PR review comments`,
-              `**This is critical.** Post EVERY question from clarify as a **separate PR review comment** on this PR.`,
+              `### 3. Create a PR and post ALL clarification questions as review comments`,
+              `Create a PR from \`${branch}\`, then post EVERY question from clarify as a **separate PR review comment**.`,
               `Post each comment on the most relevant line of the spec file.`,
               ``,
               `Format each comment as:`,
@@ -262,53 +253,37 @@ jobs:
               ``,
               `Do NOT proceed past planning until all clarification questions are posted and reviewed.`,
               ``,
-              `### 5. Update the linked issue when done`,
+              `### 4. Update this issue when done`,
               `- Remove label: \`ready-to-spec\``,
               `- Add label: \`in-progress\``,
-              `- Comment on the issue with the number of clarification questions pending`,
+              `- Comment with the PR link and number of clarification questions pending`,
             ].join('\n');
 
-            // Update the PR body
-            await github.rest.pulls.update({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: prNumber,
-              body: prInstructions,
-            });
-
-            // --- Assign agent to the PR (PRs are issues in GitHub API) ---
-
-            try {
-              await github.rest.issues.addAssignees({
+            const currentBody = issue.body || '';
+            if (!currentBody.includes('## Copilot Instructions')) {
+              await github.rest.issues.update({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                issue_number: prNumber,
-                assignees: [AGENT],
+                issue_number: issue.number,
+                body: currentBody + instructions,
               });
-            } catch (e) {
-              core.warning(`Could not assign ${AGENT} to PR: ${e.message}`);
             }
 
-            // --- Comment on the original issue linking to the PR ---
+            // --- Comment on the issue ---
 
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issue.number,
               body: [
-                `### ${label} workflow ready`,
+                `### ${label} — branch ready`,
                 ``,
                 `| | |`,
                 `|---|---|`,
                 `| **Branch** | \`${branch}\` |`,
-                `| **PR** | ${prUrl} |`,
-                `| **Agent** | @${AGENT} |`,
-                `| **Command** | \`${command}\` |`,
+                `| **Workflow** | \`${command}\` |`,
                 ``,
-                `The branch and spec structure have been created. **${AGENT}** has been assigned to:`,
-                `1. Write the spec on branch \`${branch}\``,
-                `2. Run \`/speckit.clarify\``,
-                `3. Post all clarification questions as review comments on the PR`,
+                `The branch and spec structure have been created. Assign **Copilot** to this issue to start.`,
                 ``,
                 `**Manual alternative**: \`git checkout ${branch} && ${command} ${issueUrl}\``,
               ].join('\n'),
@@ -331,7 +306,7 @@ jobs:
               ``,
               `---`,
               ``,
-              `## Agent Instructions`,
+              `## Copilot Instructions`,
               ``,
               `This is a **${label.toLowerCase()}**. Branch creation was skipped (create script not available).`,
               ``,
@@ -345,17 +320,17 @@ jobs:
               `### 2. Run /speckit.clarify`,
               `After the spec is created, run \`/speckit.clarify\` to surface ambiguities and open questions.`,
               ``,
-              `### 3. Open a PR and post ALL clarification questions`,
-              `Create a draft PR, then post EVERY question from clarify as a **separate PR review comment**.`,
+              `### 3. Create a PR and post ALL clarification questions`,
+              `Create a PR, then post EVERY question from clarify as a **separate PR review comment**.`,
               `Do NOT proceed past planning until questions are posted.`,
               ``,
               `### 4. Update this issue`,
               `- Remove label: \`ready-to-spec\`, add: \`in-progress\``,
-              `- Comment with branch name, PR link, and number of clarification questions`,
+              `- Comment with PR link and number of clarification questions`,
             ].join('\n');
 
             const currentBody = issue.body || '';
-            if (!currentBody.includes('## Agent Instructions')) {
+            if (!currentBody.includes('## Copilot Instructions')) {
               await github.rest.issues.update({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -364,24 +339,9 @@ jobs:
               });
             }
 
-            try {
-              const result = await github.rest.issues.addAssignees({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: issue.number,
-                assignees: [AGENT],
-              });
-              const assigned = result.data.assignees?.map(a => a.login) || [];
-              if (!assigned.includes(AGENT)) {
-                core.warning(`addAssignees succeeded but ${AGENT} not in assignees list (silently ignored). Check org Copilot settings.`);
-              }
-            } catch (e) {
-              core.warning(`Could not assign ${AGENT}: ${e.message}`);
-            }
-
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issue.number,
-              body: `### ${label} workflow initiated\n\n**${AGENT}** has been assigned. Run \`${command} ${issueUrl}\` to start.\n\n*Note: Branch was not pre-created (create script unavailable). The agent will create it.*`,
+              body: `### ${label} — ready for Copilot\n\nAssign **Copilot** to this issue to start. The spec templates are ready.\n\n**Manual alternative**: Run \`${command} ${issueUrl}\``,
             });
