@@ -36,7 +36,7 @@ env:
 
 jobs:
   route-issue:
-    if: github.event.label.name == 'spec-ready'
+    if: github.event.label.name == 'ready-to-spec'
     runs-on: ubuntu-latest
     steps:
       # --- Step 1: Classify the issue ---
@@ -68,7 +68,7 @@ jobs:
                 body: `### Skipped: unsupported issue type\n\nThe \`spec-ready\` label was added, but this issue type is not supported.\nSupported: **feature**, **bug**, **hotfix**, **enhancement**, **refactor**, **deprecation**, **modification**.`,
               });
               await github.rest.issues.removeLabel({
-                owner: context.repo.owner, repo: context.repo.repo, issue_number: issue.number, name: 'spec-ready',
+                owner: context.repo.owner, repo: context.repo.repo, issue_number: issue.number, name: 'ready-to-spec',
               });
               return;
             }
