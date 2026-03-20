@@ -1,4 +1,4 @@
-# When an issue is labeled 'spec-ready':
+# When an issue is labeled 'ready-to-spec':
 #   1. Detect issue type (feature, bug, enhancement, refactor, hotfix, deprecate, modify)
 #   2. Checkout repo, run the spec-kit create script to create branch + spec structure
 #   3. Push the branch and create a draft PR
@@ -66,10 +66,10 @@ jobs:
               core.setOutput('skip', 'true');
               await github.rest.issues.createComment({
                 owner: context.repo.owner, repo: context.repo.repo, issue_number: issue.number,
-                body: `### Skipped: unsupported issue type\n\nThe \`spec-ready\` label was added, but this issue type is not supported.\nSupported: **feature**, **bug**, **hotfix**, **enhancement**, **refactor**, **deprecation**, **modification**.`,
+                body: `### Skipped: unsupported issue type\n\nThe \`ready-to-spec\` label was added, but this issue type is not supported.\nSupported: **feature**, **bug**, **hotfix**, **enhancement**, **refactor**, **deprecation**, **modification**.`,
               });
               await github.rest.issues.removeLabel({
-                owner: context.repo.owner, repo: context.repo.repo, issue_number: issue.number, name: 'spec-ready',
+                owner: context.repo.owner, repo: context.repo.repo, issue_number: issue.number, name: 'ready-to-spec',
               });
               return;
             }
@@ -188,7 +188,7 @@ jobs:
                 `**Workflow**: \`${workflow}\``,
                 ``,
                 `---`,
-                `*Created automatically by spec-ready workflow. Agent will write the spec, run clarify, and post questions here.*`,
+                `*Created automatically by ready-to-spec workflow. Agent will write the spec, run clarify, and post questions here.*`,
               ].join('\n'),
             });
 
@@ -259,7 +259,7 @@ jobs:
               `Do NOT proceed past planning until all clarification questions are posted and reviewed.`,
               ``,
               `### 4. Update this issue when done`,
-              `- Remove label: \`spec-ready\``,
+              `- Remove label: \`ready-to-spec\``,
               `- Add label: \`in-progress\``,
               `- Comment with the number of clarification questions pending on the PR`,
             ].join('\n');
@@ -353,7 +353,7 @@ jobs:
               `Do NOT proceed past planning until questions are posted.`,
               ``,
               `### 4. Update this issue`,
-              `- Remove label: \`spec-ready\`, add: \`in-progress\``,
+              `- Remove label: \`ready-to-spec\`, add: \`in-progress\``,
               `- Comment with branch name, PR link, and number of clarification questions`,
             ].join('\n');
 
