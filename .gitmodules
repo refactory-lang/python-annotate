@@ -1,0 +1,3 @@
+[submodule "speckit-shared"]
+	path = speckit-shared
+	url = https://github.com/refactory-lang/speckit-shared.git
