@@ -81,4 +81,4 @@ This repo uses [speckit](https://github.com/speckit) for specification-driven de
 
 **Branch convention**: Feature branches are named `<NNN>-<short-name>` matching the spec directory (e.g., `001-milestone1-pipeline`).
 
-**Issue → Spec flow**: Issues labeled `spec-ready` trigger the `spec-ready-notify` workflow, which assigns Copilot to run the speckit workflow and produce a spec + plan + tasks.
+**Issue → Spec flow**: Issues labeled `ready-to-spec` trigger the `ready-to-spec-notify` workflow, which assigns Copilot to run the speckit workflow and produce a spec + plan + tasks.
