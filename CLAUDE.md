@@ -10,7 +10,7 @@ This section is managed by `codemod` CLI.
 
 ## Project: python-annotate
 
-Type inference CLI for the Refactory transformation pipeline. Part of the [refactory-lang](https://github.com/refactory-lang) organization. Implements Step 2 (Type Infer) of the pipeline: pyright infers types, python-annotate inserts explicit PEP 484 annotations, mypy --strict verifies correctness. Not a codemod -- requires semantic analysis (whole-program data flow), not pattern matching.
+Type inference CLI for the Refactory transformation pipeline. Part of the [refactory-lang](https://github.com/refactory-lang) organization. Implements Step 4 (Type Infer) of the pipeline — a **hybrid step**: JSSG transforms (via Codemod semantic analysis with ruff) handle symbol resolution, pyright handles type inference, python-annotate inserts explicit PEP 484 annotations using libcst, and mypy --strict verifies correctness.
 
 ### Architecture
 
@@ -18,11 +18,17 @@ Type inference CLI for the Refactory transformation pipeline. Part of the [refac
 - **Core** (`src/refactory_annotate/__init__.py`): Annotation insertion logic using `libcst`
 - **Tests** (`tests/`): pytest test suite
 
-### Pipeline Position
+### Pipeline Position (Hybrid Step)
 
 ```
-Step 1: Normalize  -->  Step 2: Type Infer      -->  Step 3: Validate  -->  ...
-(refactory-format)     (python-annotate)          (refactory-check)
+                    Step 4: Type Infer (hybrid)
+             ┌─────────────────────────────────────────┐
+Step 3:      │  JSSG transforms   →  pyright oracle    │   Step 5:
+Normalize ──►│  (symbol resolution)  (type inference)   │──► Validate
+(refactory-  │           ↓                  ↓           │   (refactory-
+ format)     │     site list    →   python-annotate     │    check)
+             │                      (insert annotations)│
+             └─────────────────────────────────────────┘
 ```
 
 Skipped in strict mode (code already fully annotated).
