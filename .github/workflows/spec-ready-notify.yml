@@ -101,44 +101,49 @@ jobs:
           github-token: ${{ secrets.PROJECT_SYNC_TOKEN }}
           script: |
             const issue = context.payload.issue;
-            const body = issue.body || '';
             const owner = context.repo.owner;
             const repo = context.repo.repo;
 
-            // Parse dependency references
-            const deps = [];
-            const sameRepo = /(?:depends on|blocked by|requires|after)\s+#(\d+)/gi;
-            let m;
-            while ((m = sameRepo.exec(body)) !== null) {
-              deps.push({ owner, repo, number: parseInt(m[1]) });
-            }
-            const crossRepo = /(?:depends on|blocked by|requires|after)\s+([\w-]+)\/([\w-]+)#(\d+)/gi;
-            while ((m = crossRepo.exec(body)) !== null) {
-              deps.push({ owner: m[1], repo: m[2], number: parseInt(m[3]) });
-            }
+            // Query the blockedBy relationships via GraphQL API
+            const { node } = await github.graphql(`
+              query($issueId: ID!) {
+                node(id: $issueId) {
+                  ... on Issue {
+                    blockedBy(first: 50) {
+                      nodes {
+                        number
+                        title
+                        state
+                        repository { name owner { login } }
+                        labels(first: 20) { nodes { name } }
+                      }
+                    }
+                  }
+                }
+              }
+            `, { issueId: issue.node_id });
 
-            if (deps.length === 0) {
+            const blockers = node?.blockedBy?.nodes || [];
+
+            if (blockers.length === 0) {
               core.setOutput('blocked', 'false');
-              core.info('No dependencies found');
+              core.info('No blockedBy relationships found');
               return;
             }
 
-            const incomplete = [];
-            for (const dep of deps) {
-              try {
-                const { data: depIssue } = await github.rest.issues.get({
-                  owner: dep.owner, repo: dep.repo, issue_number: dep.number,
-                });
-                const depLabels = depIssue.labels.map(l => l.name);
-                const isComplete = depIssue.state === 'closed'
-                  || depLabels.includes('implementation-complete')
-                  || depLabels.includes('done');
+            core.info(`Found ${blockers.length} blockedBy relationship(s)`);
 
-                if (!isComplete) {
-                  incomplete.push(`${dep.owner}/${dep.repo}#${dep.number} (${depIssue.title})`);
-                }
-              } catch (e) {
-                incomplete.push(`${dep.owner}/${dep.repo}#${dep.number} (could not fetch)`);
+            const incomplete = [];
+            for (const dep of blockers) {
+              const depLabels = dep.labels.nodes.map(l => l.name);
+              const isComplete = dep.state === 'CLOSED'
+                || depLabels.includes('implementation-complete')
+                || depLabels.includes('done');
+
+              if (!isComplete) {
+                const depOwner = dep.repository.owner.login;
+                const depRepo = dep.repository.name;
+                incomplete.push(`${depOwner}/${depRepo}#${dep.number} (${dep.title})`);
               }
             }
 
@@ -174,7 +179,7 @@ jobs:
               core.warning(`Blocked by ${incomplete.length} incomplete dependencies`);
             } else {
               core.setOutput('blocked', 'false');
-              core.info(`All ${deps.length} dependencies are complete`);
+              core.info(`All ${blockers.length} dependencies are complete`);
             }
 
       # --- Step 2: Checkout and create the branch ---
